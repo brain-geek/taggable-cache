@@ -1,16 +1,16 @@
-require 'spec_helper'
+require File.join(File.dirname(__FILE__), '..', 'spec_helper.rb')
 
-describe TaggableCache do
+describe TaggableCache::Store do
   describe "connection to redis" do
   	it "should use default settings" do
       Redis.should_receive(:new)
-      TaggableCache.new
+      TaggableCache::Store.new
   	end
   end
 
   describe "adding tags" do
     before :all do
-      @object = TaggableCache.new
+      @object = TaggableCache::Store.new
       @redis = Redis.new
       #clean up all redis data
       @redis.flushall
@@ -18,7 +18,8 @@ describe TaggableCache do
 
     describe "queque names" do
       it "should use id and model name if saved activerecord object" do
-        @object.id_for(Page.create(:id => 1)).should == 'page-1'
+        page = Page.create
+        @object.id_for(page).should == "page-#{page.id}"
       end
 
       it "should use id and model name if not saved activerecord object" do
@@ -53,13 +54,13 @@ describe TaggableCache do
 
     describe "get data from redis" do
       it "should return keys and leave nothing behind" do
-        page = Page.create(:id => 1)
+        page = Page.create
 
         @object.add('tag_name', page)
-        @redis.smembers('page-1').should == ['tag_name']
+        @redis.smembers("page-#{page.id}").should == ['tag_name']
         
         @object.get(page).should == ['tag_name']
-        @redis.smembers('page-1').should be_empty
+        @redis.smembers("page-#{page.id}").should be_empty
       end
     end
   end

@@ -13,4 +13,5 @@ pkg
 
 #fake app generated
 /spec/internal/log
-/spec/internal/db/*.sqlite.db
+/spec/internal/db/*.sqlite
+/tmp
