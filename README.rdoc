@@ -1,6 +1,14 @@
-= taggable-cache
+= Taggable cache
 
-Description goes here.
+This gem simplifies cache expiration in rails.
+
+= How to use
+
+See example in spec/internal.
+
+== Build Status {<img src="https://secure.travis-ci.org/brain-geek/taggable-cache.png"/>}[http://travis-ci.org/brain-geek/taggable-cache]
+
+== Dependency Status {<img src="https://gemnasium.com/brain-geek/taggable-cache.png?travis"/>}[https://gemnasium.com/brain-geek/taggable-cache]
 
 == Contributing to taggable-cache
  
@@ -14,6 +22,5 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2012 Alex Rozumey. See LICENSE.txt for
-further details.
+Copyright (c) 2012 Alex Rozumey. See LICENSE.txt for further details.
 
