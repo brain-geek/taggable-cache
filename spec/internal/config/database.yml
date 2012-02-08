@@ -1,0 +1,10 @@
+development: &defaults
+  adapter: sqlite3
+  database: db/tst.sqlite.db
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+
