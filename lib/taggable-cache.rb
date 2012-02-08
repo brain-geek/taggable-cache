@@ -18,4 +18,18 @@ class TaggableCache
       nil
     end
   end
+
+  def add(tag, *members)
+    members.each do |element|
+      ident = id_for(element)
+      @redis.sadd ident, tag unless ident.nil?
+    end
+  end
+
+  def get(tag)
+    ident = id_for(tag)
+    elements = @redis.smembers(ident)
+    @redis.del(ident)
+    elements
+  end
 end
