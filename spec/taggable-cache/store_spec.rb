@@ -62,6 +62,19 @@ describe TaggableCache::Store do
         @object.get(page).should == ['tag_name']
         @redis.smembers("page-#{page.id}").should be_empty
       end
+
+      it "should do multi-get" do
+        page = Page.create
+
+        @object.add('tag_name', page)
+        @object.add('tag2', Page)
+        @redis.smembers("page-#{page.id}").should == ['tag_name']
+        @redis.smembers("page").should == ['tag2']
+        
+        @object.get(page, Page).should == ['tag_name', 'tag2']
+        @redis.smembers("page-#{page.id}").should be_empty
+        @redis.smembers("page").should be_empty
+      end
     end
   end
 end

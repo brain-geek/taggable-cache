@@ -26,10 +26,12 @@ class TaggableCache::Store
     end
   end
 
-  def get(tag)
-    ident = id_for(tag)
-    elements = @redis.smembers(ident)
-    @redis.del(ident)
-    elements
+  def get(*members)
+    members.map do |tag|
+      ident = id_for(tag)
+      elements = @redis.smembers(ident)
+      @redis.del(ident)
+      elements
+    end.flatten.compact
   end
 end
