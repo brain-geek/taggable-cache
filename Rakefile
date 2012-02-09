@@ -1,50 +1,14 @@
 # encoding: utf-8
 
-require 'rubygems'
-require 'bundler'
 begin
-  Bundler.setup(:default, :development)
-rescue Bundler::BundlerError => e
-  $stderr.puts e.message
-  $stderr.puts "Run `bundle install` to install missing gems"
-  exit e.status_code
-end
-require 'rake'
-
-require 'jeweler'
-Jeweler::Tasks.new do |gem|
-  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "taggable-cache"
-  gem.homepage = "http://github.com/brain-geek/taggable-cache"
-  gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "brain-geek@yandex.ua"
-  gem.authors = ["Alex Rozumey"]
-  # dependencies defined in Gemfile
-end
-Jeweler::RubygemsDotOrgTasks.new
-
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'spec'
-  test.pattern = 'spec/**/*_spec.rb'
-  test.verbose = true
-end
-
-task :default => :spec
-
-require 'rdoc/task'
-Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
-
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "taggable-cache #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
+  require 'bundler'
+  Bundler::GemHelper.install_tasks
+rescue LoadError => e
+  warn "[WARNING]: It is recommended that you use bundler during development: gem install bundler"
 end
 
 require 'rspec/core/rake_task'
 
 RSpec::Core::RakeTask.new('spec')
 
+task :default => :spec

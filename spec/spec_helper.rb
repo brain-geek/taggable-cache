@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'bundler'
-require 'taggable-cache'
+require 'taggable_cache'
 
 Bundler.require :default, :development
 

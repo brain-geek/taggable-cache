@@ -1,5 +1,5 @@
 #combustion uses rails file cache, so we make magic on it
-require 'taggable-cache/rails'
+require 'taggable_cache/rails'
 
 ActiveSupport::Cache::FileStore.class_eval do
   include TaggableCache::Rails::Cache

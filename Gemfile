@@ -1,9 +1,8 @@
 source "http://rubygems.org"
 
-group :development do
-  gem "jeweler", "~> 1.8.3"
-  gem "rdoc", "~> 3.12"
+gemspec
 
+group :development do
   gem 'pry'
 end
 
@@ -11,5 +10,3 @@ gem 'rspec-rails', :require => false
 gem 'rspec'
 gem 'combustion', '~> 0.3.1'
 gem 'sqlite3'
-
-gem 'redis'
