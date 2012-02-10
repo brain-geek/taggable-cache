@@ -22,6 +22,7 @@ describe TaggableCache::Rails::Cache do
 
       Rails.cache.read('key').should == 'value'
 
+      #save should trigger deleting depending cache entries
       @page_object.name = @page_object.name.to_s + '1'
       @page_object.save!
 
