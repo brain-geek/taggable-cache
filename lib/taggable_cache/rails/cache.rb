@@ -4,7 +4,7 @@ module TaggableCache::Rails::Cache
   end
 
   def write(name, value, options = nil)
-    if options.has_key?(:depends_on)
+    if !options.nil? && options.has_key?(:depends_on) 
       taggable.add(name, *options[:depends_on])
       #@taggable.
       options.delete(:depends_on)

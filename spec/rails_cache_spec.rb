@@ -37,5 +37,10 @@ describe TaggableCache::Rails::Cache do
 
       Rails.cache.read('lorem').should be_nil
     end
+
+    it "does simple writes" do
+      Rails.cache.write 'ipsum', 'lorem'
+      Rails.cache.read('ipsum').should == 'lorem'
+    end
   end
 end

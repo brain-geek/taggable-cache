@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    taggable_cache (0.1.0)
+    taggable_cache (0.1.1)
       redis
 
 GEM
