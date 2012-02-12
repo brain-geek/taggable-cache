@@ -3,7 +3,7 @@ ActiveSupport::Cache::Store.class_eval do
     @taggable ||= ::TaggableCache::Store.new
   end
 
-  alias :original_write :write
+  alias_method :original_write, :write
 
   def write(name, value, options = nil)
     if !options.nil? && options.has_key?(:depends_on) 
@@ -15,8 +15,8 @@ ActiveSupport::Cache::Store.class_eval do
   end
 
   def delete_keys(*params)
-    taggable.get(params).each do |m|
-      delete(m)
+    taggable.get(*params).each do |m|
+      self.delete(m)
     end
   end
 end

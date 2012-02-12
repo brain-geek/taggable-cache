@@ -8,11 +8,12 @@ describe PageCachingController do
   it "should be successful" do
     Page.should_receive :load_lot_of_data
     get 'page_caching/index'
-    response.status.should be(200)      
+    response.status.should be(200)
   end
 
   it "should run second test without cache" do
     Page.should_receive :load_lot_of_data
     get 'page_caching/index'
+    response.status.should be(200)
   end
 end

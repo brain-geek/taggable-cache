@@ -4,12 +4,17 @@ describe 'TaggableCache::Rails::Cache' do
   before :all do
     @object = TaggableCache::Store.new
     Redis.new.flushall
-    @page_object = Page.create    
+    @page_object = Page.create
+  end
+
+  before :each do 
+    Rails.cache.delete 'key'
+    Rails.cache.delete 'lorem'
   end
 
   describe "taggable hooked on Rails.cache.write" do
     it "adds key to store" do
-      Rails.cache.write 'key', 'value', :depends_on => [@page_object]
+      Rails.cache.write('key', 'value', :depends_on => [@page_object])
 
       @object.get(@page_object).should == ['key']
     end
@@ -17,7 +22,7 @@ describe 'TaggableCache::Rails::Cache' do
 
   describe "taggable hooked as observer" do
     it "detects object change" do
-      Rails.cache.write 'key', 'value', :depends_on => [@page_object]
+      Rails.cache.write('key', 'value', :depends_on => [@page_object])
 
       Rails.cache.read('key').should == 'value'
 
@@ -29,7 +34,7 @@ describe 'TaggableCache::Rails::Cache' do
     end
 
     it "detects model change" do
-      Rails.cache.write 'lorem', 'impsum', :depends_on => [Page]
+      Rails.cache.write('lorem', 'impsum', :depends_on => [Page])
 
       Rails.cache.read('lorem').should == 'impsum'
 
