@@ -3,6 +3,9 @@ class ActionCachingController < ActionController::Base
 
   def index
     Page.load_lot_of_data
+
+    depends_on Page
+
     render :text => 'sdfsd'
   end
 

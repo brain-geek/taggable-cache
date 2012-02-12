@@ -1,7 +1,7 @@
 module TaggableCache::Rails
   class Observer < ActiveRecord::Observer
     def event(model)
-      Rails.cache.delete_keys(model, model.class)
+      Rails.cache.delete_by_tags(model, model.class)
     end
 
     alias :after_update :event
