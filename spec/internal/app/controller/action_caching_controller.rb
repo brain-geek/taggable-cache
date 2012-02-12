@@ -1,4 +1,4 @@
-class PageCachingController < ActionController::Base
+class ActionCachingController < ActionController::Base
   caches_action :index
 
   def index
