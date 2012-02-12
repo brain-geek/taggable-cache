@@ -1,10 +1,9 @@
 require File.join(File.dirname(__FILE__), 'spec_helper.rb')
 
-describe TaggableCache::Rails::Cache do
+describe 'TaggableCache::Rails::Cache' do
   before :all do
     @object = TaggableCache::Store.new
     Redis.new.flushall
-
     @page_object = Page.create    
   end
 
