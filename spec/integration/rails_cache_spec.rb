@@ -12,15 +12,20 @@ describe 'TaggableCache::Rails::Cache' do
     Rails.cache.delete 'lorem'
   end
 
-  describe "taggable hooked on Rails.cache.write" do
+  describe "Rails.cache.write integration" do
     it "adds key to store" do
       Rails.cache.write('key', 'value', :depends_on => [@page_object])
 
       @object.get(@page_object).should == ['key']
     end
+
+    it "does simple writes" do
+      Rails.cache.write 'ipsum', 'lorem'
+      Rails.cache.read('ipsum').should == 'lorem'
+    end    
   end
 
-  describe "taggable hooked as observer" do
+  describe "Activerecord integration" do    
     it "detects object change" do
       Rails.cache.write('key', 'value', :depends_on => [@page_object])
 
@@ -41,11 +46,6 @@ describe 'TaggableCache::Rails::Cache' do
       Page.create
 
       Rails.cache.read('lorem').should be_nil
-    end
-
-    it "does simple writes" do
-      Rails.cache.write 'ipsum', 'lorem'
-      Rails.cache.read('ipsum').should == 'lorem'
     end
   end
 end
