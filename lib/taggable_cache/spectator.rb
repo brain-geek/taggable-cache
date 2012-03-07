@@ -1,4 +1,4 @@
-class Cacheobserver < ActiveRecord::Observer
+class TaggableCache::Spectator < ActiveRecord::Observer
   def event(model)
     Rails.cache.delete_by_tags(model, model.class)
   end

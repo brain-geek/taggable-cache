@@ -2,7 +2,7 @@ require 'active_record'
 require 'action_controller'
 require 'rails'
 
-require 'taggable_cache/observer'
+require 'taggable_cache/spectator'
 
 ActiveSupport::Cache::Store.class_eval do
   def taggable
@@ -41,8 +41,8 @@ module TaggableCache
   class Railtie < ::Rails::Railtie
     initializer "taggable_cache" do |app|
       # binding.pry
-      ActiveRecord::Base.observers << Cacheobserver
-      ActiveRecord::Base.add_observer Cacheobserver.instance
+      ActiveRecord::Base.observers << TaggableCache::Spectator
+      ActiveRecord::Base.add_observer TaggableCache::Spectator.instance
     end    
   end  
 end
