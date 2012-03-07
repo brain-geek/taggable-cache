@@ -1,10 +1,6 @@
 source :rubygems
 
-gemspec
-
-group :development do
-  gem 'pry'
-end
+gem 'taggable_cache', :path => '..'
 
 gem 'rake'
 gem 'rspec-rails', :require => false
@@ -13,4 +9,5 @@ gem 'capybara'
 gem 'combustion', '~> 0.3.1'
 gem 'sqlite3'
 
-gem 'rails', '~> 3.0.0'
+
+gem 'rails', '~> 3.1.0'
