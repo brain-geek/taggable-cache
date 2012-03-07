@@ -34,7 +34,7 @@ describe TaggableCache::Store do
       end
     end
 
-    describe "Redis interaction"
+    describe "Redis interaction" do
       describe "add data" do
         it "should push data" do
           o1 = Object.new
