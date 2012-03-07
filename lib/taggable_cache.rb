@@ -2,4 +2,4 @@ module TaggableCache
 end
 
 require 'taggable_cache/store'
-require 'taggable_cache/railtie' if defined?(Rails)
+require 'taggable_cache/railtie'
