@@ -4,6 +4,7 @@ gemspec
 
 group :development do
   gem 'pry'
+  gem 'pry-nav'
 end
 
 gem 'rake'
@@ -13,4 +14,4 @@ gem 'capybara'
 gem 'combustion', :git => 'https://brain-geek@github.com/brain-geek/combustion.git' #, '~> 0.3.1'
 gem 'sqlite3'
 
-gem 'rails', '~> 3.1.0'
+gem 'rails', '~> 3.2.0'
