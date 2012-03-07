@@ -24,7 +24,7 @@ describe 'TaggableCache::Rails::Cache' do
   end
 
   describe "Activerecord integration" do    
-    it "detects object change" do
+    it "object change" do
       Rails.cache.write('key', 'value', :depends_on => [@page_object])
 
       Rails.cache.read('key').should == 'value'
@@ -36,7 +36,7 @@ describe 'TaggableCache::Rails::Cache' do
       Rails.cache.read('key').should be_nil
     end
 
-    it "detects model change" do
+    it "model change" do
       Rails.cache.write('lorem', 'impsum', :depends_on => [Page])
 
       Rails.cache.read('lorem').should == 'impsum'
@@ -44,6 +44,44 @@ describe 'TaggableCache::Rails::Cache' do
       Page.create
 
       Rails.cache.read('lorem').should be_nil
+    end
+
+    describe "scope change" do
+      it "should not drop if changes are unrelated" do
+        Rails.cache.write('lorem', 'impsum', :depends_on => [Page.where(:name => 'bob')])
+        Rails.cache.read('lorem').should == 'impsum'
+
+        page = Page.create(:name => 'jack')
+        page.name = 'alice'
+        page.save!
+        Page.delete(page.id)
+
+        Rails.cache.read('lorem').should == 'impsum'
+      end
+
+      it "should drop if object has been in scope before changes" do
+        page = Page.create(:name => 'jack')
+
+        Rails.cache.write('lorem', 'impsum', :depends_on => [Page.where(:name => 'jack')])
+        Rails.cache.read('lorem').should == 'impsum'
+
+        page.name = 'alice'
+        page.save!
+
+        Rails.cache.read('lorem').should be_nil
+      end
+
+      it "should drop if object is now in scope" do
+        page = Page.create(:name => 'joe')
+
+        Rails.cache.write('lorem', 'impsum', :depends_on => [Page.where(:name => 'jack')])
+        Rails.cache.read('lorem').should == 'impsum'
+
+        page.name = 'jack'
+        page.save!
+
+        Rails.cache.read('lorem').should be_nil        
+      end
     end
   end
 end
