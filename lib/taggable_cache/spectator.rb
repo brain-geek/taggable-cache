@@ -4,6 +4,7 @@ class TaggableCache::Spectator < ActiveRecord::Observer
   end
 
   alias :after_update :event
-  alias :after_destroy :event
+  alias :before_update :event
+  alias :before_destroy :event
   alias :after_create :event
 end

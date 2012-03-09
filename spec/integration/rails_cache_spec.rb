@@ -46,7 +46,7 @@ describe 'TaggableCache::Rails::Cache' do
       Rails.cache.read('lorem').should be_nil
     end
 
-    pending "scope change" do
+    describe  "scope change" do
       it "should not drop if changes are unrelated" do
         Rails.cache.write('lorem', 'impsum', :depends_on => [Page.where(:name => 'bob')])
         Rails.cache.read('lorem').should == 'impsum'
@@ -80,7 +80,7 @@ describe 'TaggableCache::Rails::Cache' do
         page.name = 'jack'
         page.save!
 
-        Rails.cache.read('lorem').should be_nil        
+        Rails.cache.read('lorem').should be_nil
       end
     end
   end

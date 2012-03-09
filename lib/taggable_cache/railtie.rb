@@ -27,6 +27,10 @@ ActiveSupport::Cache::Store.class_eval do
     taggable.get(*params).each do |m|
       self.delete(m)
     end
+
+    taggable.get_scope(*(params.delete_if{|a| not a.is_a? ActiveRecord::Base})).each do |m|
+      self.delete(m)
+    end
   end
 end
 
@@ -40,7 +44,6 @@ end
 module TaggableCache
   class Railtie < ::Rails::Railtie
     initializer "taggable_cache" do |app|
-      # binding.pry
       ActiveRecord::Base.observers << TaggableCache::Spectator
       ActiveRecord::Base.add_observer TaggableCache::Spectator.instance
     end    
