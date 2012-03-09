@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    taggable_cache (0.2.0)
+    taggable_cache (0.2.1)
       rails (>= 3.0.8)
       redis (>= 2.2.2)
 
