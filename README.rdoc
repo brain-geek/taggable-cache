@@ -1,10 +1,42 @@
 = Taggable cache
 
-This gem simplifies cache expiration in rails.
+This gem simplifies cache expiration in rails by adding depends_on helper, which expires cache element when depending object is changed/deleted.
 
 = How to use
 
-See example in spec/internal.
+Controller(action caching):
+
+  caches_action :index
+
+  def index
+    Page.load_lot_of_data
+
+    #this depends on any Page object change - creation, deletion, change
+    depends_on Page
+  end
+
+View(fragment caching):
+
+  <%# Page.active can be AR scope, every Page object on change is checked if it is in this scope, and if is - expires cache element %>
+  <% cache 'cache_entry', :depends_on => [Page.active] do %>
+    <% Page.load_lot_of_data %>
+  <% end %>
+
+Usage with Rails.cache:
+
+  page = Page.first
+  #this cache key expires only if this Page object is changed/deleted
+  Rails.cache.write('key', 'value', :depends_on => [page])
+
+Usage with cells gem:
+
+  class TabsCell < Cell::Rails
+    cache :index, nil, :depends_on => [Category, Metacategory, Product]
+
+    def index
+      render
+    end
+  end
 
 == Build Status {<img src="https://secure.travis-ci.org/brain-geek/taggable-cache.png"/>}[http://travis-ci.org/brain-geek/taggable-cache]
 
