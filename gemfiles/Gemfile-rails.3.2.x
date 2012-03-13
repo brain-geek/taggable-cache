@@ -6,7 +6,7 @@ gem 'rake'
 gem 'rspec-rails', :require => false
 gem 'rspec'
 gem 'capybara'
-gem 'combustion', :git => 'https://brain-geek@github.com/brain-geek/combustion.git'
+gem 'combustion'
 gem 'sqlite3'
 
 
