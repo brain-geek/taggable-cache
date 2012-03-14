@@ -2,7 +2,9 @@ PATH
   remote: .
   specs:
     taggable_cache (0.3.0)
-      rails (>= 3.1.0)
+      actionpack (>= 3.1.0)
+      activerecord (>= 3.1.0)
+      railties (>= 3.1.0)
       redis (>= 2.2.2)
 
 GEM
