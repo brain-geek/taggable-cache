@@ -2,7 +2,8 @@ require File.join(File.dirname(__FILE__), '..', 'spec_helper.rb')
 
 describe TaggableCache::Store do
   after :all do
-    ENV = {}
+    ENV.delete("REDIS_HOST")
+    ENV.delete("REDIS_PORT")
   end
 
   it "should fall back to defaults if no settings given" do
@@ -12,10 +13,8 @@ describe TaggableCache::Store do
   end
 
   it "should use ENV settings" do
-    ENV = {
-      "REDIS_HOST" =>  'hostname.lvh.me',
-      "REDIS_PORT" =>  '1234'
-    }
+    ENV["REDIS_HOST"] =  'hostname.lvh.me';
+    ENV["REDIS_PORT"] =  '1234';
 
     Redis.should_receive(:new).with(:host => 'hostname.lvh.me', :port => 1234)
 
