@@ -1,4 +1,5 @@
-source :rubygems
+filename="gemfiles/Gemfile.shared"
+eval(IO.read(filename), binding)
 
 gemspec
 
@@ -7,11 +8,6 @@ group :development do
   gem 'pry-nav'
 end
 
-gem 'rake'
-gem 'rspec-rails', :require => false
-gem 'rspec'
-gem 'capybara'
-gem 'combustion'
-gem 'sqlite3'
+gem 'redis-rails', '~>3.2.3'
 
 gem 'rails', '~> 3.2.0'
