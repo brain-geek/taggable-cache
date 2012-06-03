@@ -8,4 +8,3 @@ gem 'combustion'
 gem 'sqlite3'
 
 gem 'memcache-client'
-gem 'redis-rails', '~>3.2.3'
