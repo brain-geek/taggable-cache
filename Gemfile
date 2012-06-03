@@ -10,7 +10,7 @@ end
 gem 'rake'
 gem 'rspec-rails', :require => false
 gem 'rspec'
-gem 'capybara'
+# gem 'capybara'
 gem 'combustion'
 gem 'sqlite3'
 

@@ -15,3 +15,5 @@ pkg
 /spec/internal/log
 /spec/internal/db/*.sqlite
 /tmp
+
+/Gemfile.lock
