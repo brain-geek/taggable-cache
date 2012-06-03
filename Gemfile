@@ -1,4 +1,4 @@
-filename="gemfiles/Gemfile.shared"
+filename = File.expand_path(File.dirname(__FILE__)+"/gemfiles/Gemfile.shared")
 eval(IO.read(filename), binding)
 
 gemspec
