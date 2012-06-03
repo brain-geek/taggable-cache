@@ -1,5 +1,6 @@
 = Taggable cache 0.4.1 (unreleased)
-- Supports(and tested against) 3 cache stores: file store, memcached, redis
+
+- Fixed support for redis cache store
 
 = Taggable cache 0.4.0
 
