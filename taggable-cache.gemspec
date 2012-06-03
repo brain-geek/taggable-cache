@@ -32,6 +32,6 @@ Gem::Specification.new do |s|
   s.add_dependency(%q<railties>, [">= 3.1.0"])
   s.add_dependency(%q<actionpack>, [">= 3.1.0"])
   s.add_dependency(%q<activerecord>, [">= 3.1.0"])
-  s.add_dependency(%q<redis>, [">= 2.2.2"])
+  s.add_dependency(%q<redis>, [">= 2.2.0"])
 end
 
