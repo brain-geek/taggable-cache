@@ -8,6 +8,4 @@ group :development do
   gem 'pry-nav'
 end
 
-gem 'redis-rails', '~>3.2.3'
-
 gem 'rails', '~> 3.2.0'
