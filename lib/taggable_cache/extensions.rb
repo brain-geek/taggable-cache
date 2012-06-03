@@ -6,16 +6,16 @@ module TaggableCache
         def taggable
           @taggable ||= ::TaggableCache::Store.new
         end
-
-        alias_method :original_write, :write
-
-        def write(name, value, options = nil)
+        
+        def write_with_taggable(name, value, options = nil)
           if !options.nil? && options.has_key?(:depends_on) 
             add_tags(name, *options[:depends_on])
           end
 
-          original_write(name, value, options)
+          write_without_taggable(name, value, options)
         end
+
+        alias_method_chain :write, :taggable
 
         def add_tags(key, *params)
           taggable.add(key, *params)
