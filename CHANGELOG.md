@@ -1,6 +1,6 @@
-= Taggable cache 0.4.1 (unreleased)
+= Taggable cache 0.4.1
 
-- Fixed support for redis cache store
+- Fixed support for redis cache store with rails 3.2
 
 = Taggable cache 0.4.0
 
