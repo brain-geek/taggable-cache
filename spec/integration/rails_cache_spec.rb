@@ -20,7 +20,42 @@ describe 'TaggableCache::Rails::Cache' do
     it "does simple writes" do
       Rails.cache.write 'ipsum', 'lorem'
       Rails.cache.read('ipsum').should == 'lorem'
-    end    
+    end
+  end
+
+  describe "Rails.cache.fetch integration" do
+    it "adds key to store" do
+      Rails.cache.fetch('fetch_key', :depends_on => @page_object) do
+        'value1'
+      end
+
+      @object.get(@page_object).should == ['fetch_key']
+    end
+
+    it "does simple expires" do
+      Rails.cache.fetch 'ftch_ipsum', :depends_on => @page_object do 
+        'lorem ipsum'
+      end
+
+      Rails.cache.read('ftch_ipsum').should == 'lorem ipsum'
+
+      @page_object.name = 'dfgsdgsdfgsdfg'
+      @page_object.save!
+
+      Rails.cache.read('ftch_ipsum').should be_nil
+    end
+
+    it "does class expires" do
+      Rails.cache.fetch 'ftch_ipsum2', :depends_on => Page do 
+        'lorem ipsum di'
+      end
+
+      Rails.cache.read('ftch_ipsum2').should == 'lorem ipsum di'
+
+      @page_object.save!
+
+      Rails.cache.read('ftch_ipsum2').should be_nil
+    end
   end
 
   describe "Activerecord integration" do    
