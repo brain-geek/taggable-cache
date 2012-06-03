@@ -9,3 +9,8 @@ env:
   - CACHE_STORE=redis
   - CACHE_STORE=memcached
   - CACHE_STORE=file_store
+matrix:
+  exclude:
+    - rvm: 1.9.3
+      gemfile: gemfiles/Gemfile-rails.3.1.x
+      env: CACHE_STORE=redis
