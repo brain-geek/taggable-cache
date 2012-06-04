@@ -2,7 +2,9 @@
 
 This gem simplifies cache expiration in rails by adding depends_on helper, which expires cache element when depending object is changed/deleted.
 
+= Build Status {<img src="https://secure.travis-ci.org/brain-geek/taggable-cache.png"/>}[http://travis-ci.org/brain-geek/taggable-cache]
 = How to use
+For taggable-cache you must have redis server for data about tags. Cache storage can be anything, but gem uses redis for its own storage.
 
 Controller(action caching):
 
@@ -38,7 +40,13 @@ Usage with cells gem:
     end
   end
 
-== Build Status {<img src="https://secure.travis-ci.org/brain-geek/taggable-cache.png"/>}[http://travis-ci.org/brain-geek/taggable-cache]
+If you are using redis for cache, it is recommended to set default expire_ttl value:
+
+    config.cache_store = ActiveSupport::Cache::RedisStore.new(:expire_in => 16.hours.to_i)    
+
+== What is supported
+
+Rails 3.1.x and 3.2.x are supported. Tested with ruby 1.9.3, but should work on 1.8.7. As cache storage you can use redis, memcached and file store caches. 
 
 == Contributing to taggable-cache
  
