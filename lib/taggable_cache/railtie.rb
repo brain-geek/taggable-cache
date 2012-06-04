@@ -1,4 +1,6 @@
-require 'taggable_cache/extensions'
+require 'taggable_cache/extensions/action_controller'
+require 'taggable_cache/extensions/active_record'
+require 'taggable_cache/extensions/cache_store'
 
 module TaggableCache
   class Railtie < ::Rails::Railtie
