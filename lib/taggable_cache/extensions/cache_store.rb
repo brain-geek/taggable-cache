@@ -30,6 +30,25 @@ module TaggableCache
             self.delete(m)
           end
         end
+
+        def expire_all
+          #Load all the models
+          Dir.glob(Rails.root + '/app/models/*.rb').each {|file| require file}
+          
+          ActiveRecord::Base.subclasses.each do |cls|
+            delete_by_tags cls
+
+            pk = cls.primary_key
+
+            unless cls.first.nil?
+              range = 1..cls.order(pk).last.try(:id)
+
+              range.each do |i|
+                delete_by_tags(cls.find_by_id(i) || cls.new(:id => i))
+              end
+            end
+          end
+        end
       end
     end
   end
