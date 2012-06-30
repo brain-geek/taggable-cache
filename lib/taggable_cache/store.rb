@@ -20,6 +20,12 @@ class TaggableCache::Store
       "query-keys-#{Digest::MD5.hexdigest(obj.to_sql)}"
     elsif obj.is_a? ActiveRecord::Relation
       id_for(obj.arel)
+    elsif obj.is_a? Hash
+      if obj.include?(:cls) && obj.include?(:id)
+        "#{obj[:cls].to_s.downcase}-#{obj[:id]}"
+      else
+        nil
+      end
     else
       nil
     end

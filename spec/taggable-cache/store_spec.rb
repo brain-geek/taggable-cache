@@ -39,6 +39,19 @@ describe TaggableCache::Store do
 
         @object.id_for(Page.order(:id)).should_not == @object.id_for(Page.order(:name).arel)
       end
+
+      it "should try to parse well-formatted hash to AR object key" do
+        key = @object.id_for(page = Page.create)
+        key.should == @object.id_for({:cls => :page, :id => page.id})
+        key.should == @object.id_for({:cls => Page, :id => page.id})
+      end
+
+      it "should ignore bad-formatted hashes" do
+        @object.id_for({:cls => :page}).should be_nil
+        @object.id_for({:cls => Page}).should be_nil
+        @object.id_for({:id => 543}).should be_nil
+        @object.id_for({:sdfasdf => 345}).should be_nil
+      end
     end
 
     describe "is_scope?" do

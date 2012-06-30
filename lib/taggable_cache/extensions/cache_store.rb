@@ -38,14 +38,15 @@ module TaggableCache
           ActiveRecord::Base.subclasses.each do |cls|
             delete_by_tags cls
 
-            pk = cls.primary_key
+            pk_name = cls.primary_key
 
-            unless cls.first.nil?
-              range = 1..cls.order(pk).last.try(:id)
+            return if cls.unscoped.first.nil? #There is no sence in continuing, if model is empty
 
-              range.each do |i|
-                delete_by_tags(cls.find_by_id(i) || cls.new(:id => i))
-              end
+            last_id = cls.order(pk_name).last.try(pk_name.to_sym)
+            first_id = 1
+
+            (first_id..last_id).each do |id|
+              delete_by_tags({:cls => cls, :id => id})
             end
           end
         end

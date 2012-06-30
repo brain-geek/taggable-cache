@@ -19,9 +19,10 @@ describe TaggableCache::Store do
     Rails.cache.read('expireme').should be_nil
   end
 
-  pending "should expire cache entries, corresponding elements for which were already deleted" do
+  it "should expire cache entries, elements for which were already deleted" do
     page = Page.new
     page.save!
+
     #creating second one
     Page.new.save!
 
