@@ -5,7 +5,7 @@ module TaggableCache::Store
   class Redis < TaggableCache::Store::Base
     def initialize
       @redis = ::Redis.new  :host => ENV['REDIS_HOST'] || '127.0.0.1',
-                          :port => ENV['REDIS_PORT'] ? ENV['REDIS_PORT'].to_i : 6379
+                            :port => ENV['REDIS_PORT'] ? ENV['REDIS_PORT'].to_i : 6379
     end
 
     def add(tag, *members)
@@ -17,12 +17,10 @@ module TaggableCache::Store
     end
 
     def get(*members)
-      members.map do |tag|
-        ident = id_for(tag)
-        elements = @redis.smembers(ident)
-        @redis.del(ident)
-        elements
-      end.flatten.compact
+      keys = members.map { |tag| id_for(tag) }
+      elements = @redis.sunion(keys)
+      @redis.del(keys)
+      elements.flatten.compact
     end
 
     def add_scope(tag, scope)
