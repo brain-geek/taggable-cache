@@ -9,8 +9,7 @@ Gem::Specification.new do |s|
   s.version = TaggableCache::VERSION
 
   s.authors = ["Alex Rozumey"]
-  s.date = "2012-02-09"
-  s.description = "This gem simplifies cache expiration in rails"
+  s.description = "It makes cache expiration in rails much simpler"
   s.email = "brain-geek@yandex.ua"
 
   s.extra_rdoc_files = [
@@ -26,7 +25,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/brain-geek/taggable-cache"
   s.licenses = ["MIT"]
   s.rubygems_version = "1.8.15"
-  s.summary = "This gem simplifies cache expiration in rails by providing depends_on option to rails cache."
+  s.summary = "This gem simplifies cache expiration in rails by expanding rails cache methods."
 
   #s.add_dependency(%q<rails>, [">= 3.1.0"])
   s.add_dependency(%q<railties>, [">= 3.1.0"])
