@@ -1,6 +1,7 @@
 = Taggable cache 0.4.2(unreleased)
 
 - Internal refactoring
+- Add Rails.cache.expire_all method.
 
 = Taggable cache 0.4.1
 
