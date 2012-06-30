@@ -4,13 +4,13 @@ describe TaggableCache::Store do
   describe "connection to redis" do
   	it "should use default settings" do
       Redis.should_receive(:new)
-      TaggableCache::Store.new
+      TaggableCache::Store::Redis.new
   	end
   end
 
   describe "adding tags" do
     before :all do
-      @object = TaggableCache::Store.new
+      @object = TaggableCache::Store::Redis.new
       @redis = Redis.new
       @redis.flushall
     end
@@ -87,17 +87,17 @@ describe TaggableCache::Store do
         @redis.smembers("query-keys-#{key}").should == ['tag_scoped']
       end
 
-      it "should process 'in_scope' right way" do
+      it "should process 'in_scope?' right way" do
         bob = Page.create(:name => 'bob')
         jack = Page.create(:name => 'jack')
 
-        @object.in_scope(Page.where(:name => 'bob'), bob).should be_true
-        @object.in_scope(Page.where(:name => 'bob'), jack).should be_false
+        @object.in_scope?(Page.where(:name => 'bob'), bob).should be_true
+        @object.in_scope?(Page.where(:name => 'bob'), jack).should be_false
 
-        @object.in_scope(Page.order(:id), Page.create).should be_true
+        @object.in_scope?(Page.order(:id), Page.create).should be_true
 
         #unsaved obj(without id)
-        @object.in_scope(Page.order(:id), Page.new).should be_false
+        @object.in_scope?(Page.order(:id), Page.new).should be_false
       end
 
       describe "get_scope" do

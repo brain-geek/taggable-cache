@@ -9,7 +9,7 @@ describe TaggableCache::Store do
   it "should fall back to defaults if no settings given" do
     Redis.should_receive(:new).with(:host => '127.0.0.1', :port => 6379)
 
-    TaggableCache::Store.new
+    TaggableCache::Store::Redis.new
   end
 
   it "should use ENV settings" do
@@ -18,6 +18,6 @@ describe TaggableCache::Store do
 
     Redis.should_receive(:new).with(:host => 'hostname.lvh.me', :port => 1234)
 
-    TaggableCache::Store.new
+    TaggableCache::Store::Redis.new
   end
 end
