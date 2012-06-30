@@ -42,7 +42,7 @@ Usage with cells gem:
 
 If you are using redis for cache, it is recommended to set default expire_ttl value:
 
-    config.cache_store = ActiveSupport::Cache::RedisStore.new(:expire_in => 16.hours.to_i)    
+    config.cache_store = ActiveSupport::Cache::RedisStore.new(:expire_in => 16.hours.to_i)
 
 == What is supported
 
