@@ -4,7 +4,7 @@ This gem simplifies cache expiration in rails by adding depends_on helper, which
 
 = Build Status {<img src="https://secure.travis-ci.org/brain-geek/taggable-cache.png"/>}[http://travis-ci.org/brain-geek/taggable-cache]
 = How to use
-For taggable-cache you must have redis server for data about tags. Cache storage can be anything, but gem uses redis for its own storage.
+Taggable-cache uses redis to store cache tags data. You can use anything for an actual cache storage.
 
 Controller(action caching):
 
@@ -13,7 +13,7 @@ Controller(action caching):
   def index
     Page.load_lot_of_data
 
-    #this depends on any Page object change - creation, deletion, change
+    #this depends on any Page object change - creation, deletion, update
     depends_on Page
   end
 
@@ -27,7 +27,7 @@ View(fragment caching):
 Usage with Rails.cache:
 
   page = Page.first
-  #this cache key expires only if this Page object is changed/deleted
+  #this cache key expires only when this Page object is changed/deleted
   Rails.cache.write('key', 'value', :depends_on => [page])
 
 Usage with cells gem:
@@ -46,10 +46,10 @@ If you are using redis for cache, it is recommended to set default expire_ttl va
 
 == What is supported
 
-Rails 3.1.x and 3.2.x are supported. Tested with ruby 1.9.3, but should work on 1.8.7. As cache storage you can use redis, memcached and file store caches. 
+Rails 3.1.x and 3.2.x are supported. Tested with ruby 1.9.3, but should work on 1.8.7. As cache storage you can use redis, memcached and file store caches. Other cache storages should work but have not been tested by author.
 
 == Contributing to taggable-cache
- 
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
 * Fork the project.
