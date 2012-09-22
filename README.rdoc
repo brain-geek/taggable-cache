@@ -1,6 +1,6 @@
 = Taggable cache
 
-This gem simplifies cache expiration in rails by adding depends_on helper, which expires cache element when depending object is changed/deleted.
+This gem simplifies cache expiration in rails by adding depends_on parameter to rails cache setting, which makes cache element expire when depending object is changed.
 
 = Build Status {<img src="https://secure.travis-ci.org/brain-geek/taggable-cache.png"/>}[http://travis-ci.org/brain-geek/taggable-cache]
 = How to use
