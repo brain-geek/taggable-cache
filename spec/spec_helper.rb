@@ -9,7 +9,7 @@ class Combustion::Application
   when 'redis'
     config.cache_store = :redis_store
   when 'memcached'
-    config.cache_store = :mem_cache_store
+    config.cache_store = :mem_cache_store, "127.0.0.1"
   when 'file_store'
   end
 end
