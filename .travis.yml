@@ -2,10 +2,14 @@ language: ruby
 
 bundler_args: --without development
 
+before_install:
+  - ps aux|grep memcache
+
 #memcache is allowed to fail because of strange error - on travis instance service is running, but ruby can not connect ther
 matrix:
   allow_failures:
     - env: CACHE_STORE=memcached
+    - rvm: ree
 
 services:
   - memcached
@@ -13,6 +17,7 @@ services:
 
 rvm:
   - 1.9.3
+  - ree
 
 gemfile:
   - gemfiles/Gemfile-rails.3.1.x
