@@ -1,13 +1,6 @@
 require File.join(File.dirname(__FILE__), '..', 'spec_helper.rb')
 
 describe TaggableCache::Store do
-  it "should connect to memcached" do
-    require 'dalli'
-    dc = Dalli::Client.new('localhost:11211')
-    dc.set('abc', 123)
-    value = dc.get('abc')
-  end
-
   it "should expire all present cache entries with depends_on" do
     Rails.cache.write 'expireme', 'value', :depends_on => Page
     Rails.cache.read('expireme').should == 'value'
