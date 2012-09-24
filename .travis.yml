@@ -5,7 +5,7 @@ bundler_args: --without development
 before_install:
   - ps aux|grep memcache
 
-#memcache is allowed to fail because of strange error - on travis instance service is running, but ruby can not connect ther
+#memcache is allowed to fail because of error while tesitng on Travis - service is running, but ruby can not connect there
 matrix:
   allow_failures:
     - env: CACHE_STORE=memcached
