@@ -11,7 +11,7 @@ describe TaggableCache::Store do
   end
 
   def new_cache_instance
-    Rails.cache.class.new
+    Rails.cache.class.new({})
   end
 
   it "should have default variables" do
