@@ -3,7 +3,7 @@ require File.join(File.dirname(__FILE__), '..', 'spec_helper.rb')
 describe 'TaggableCache::Rails::Cache' do
   before :all do
     @object = TaggableCache::Store::Redis.new
-    @page_object = Page.create
+    @page_object = Page.create!
   end
 
   before :each do 
@@ -55,6 +55,29 @@ describe 'TaggableCache::Rails::Cache' do
       @page_object.save!
 
       Rails.cache.read('ftch_ipsum2').should be_nil
+    end
+
+    it "does combined expires" do
+      page = Page.create!
+      Rails.cache.fetch 'ftch_ipsum3', :depends_on => [page, @page_object] do 
+        'lorem ipsum di'
+      end
+
+      Rails.cache.read('ftch_ipsum3').should == 'lorem ipsum di'
+
+      @page_object.save!
+
+      Rails.cache.read('ftch_ipsum3').should be_nil
+
+      Rails.cache.fetch 'ftch_ipsum3', :depends_on => [page, @page_object] do 
+        'lorem ipsum di'
+      end
+
+      Rails.cache.read('ftch_ipsum3').should == 'lorem ipsum di'
+
+      page.save!
+
+      Rails.cache.read('ftch_ipsum3').should be_nil      
     end
   end
 
