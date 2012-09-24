@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), '..', 'spec_helper.rb')
 
 describe TaggableCache::Store do
   def new_cache_instance
-    Rails.cache.class.new Rails.cache.options
+    Rails.cache.class.new
   end
 
   it "should have default variables" do
@@ -12,6 +12,7 @@ describe TaggableCache::Store do
   end
 
   it "should fall back to defaults if no settings given" do
+    Redis.should_receive(:new) if Rails.cache.is_a? ActiveSupport::Cache::RedisStore
     Redis.should_receive(:new).with(:host => '127.0.0.1', :port => 6379)
 
     new_cache_instance.taggable
@@ -24,6 +25,7 @@ describe TaggableCache::Store do
       :port => 1234
     }
 
+    Redis.should_receive(:new) if Rails.cache.is_a? ActiveSupport::Cache::RedisStore
     Redis.should_receive(:new).with(:host => 'hostname.lvh.me', :port => 1234)
 
     new_cache_instance.taggable
