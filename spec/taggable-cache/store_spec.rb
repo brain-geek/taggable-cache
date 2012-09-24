@@ -52,6 +52,10 @@ describe TaggableCache::Store do
         @object.id_for({:id => 543}).should be_nil
         @object.id_for({:sdfasdf => 345}).should be_nil
       end
+
+      it "should allow string values as keys" do
+        @object.id_for('lorem').should == 'string_lorem'
+      end
     end
 
     describe "is_scope?" do
