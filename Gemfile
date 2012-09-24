@@ -6,6 +6,8 @@ gemspec
 gem 'rails', '~> 3.2.0'
 gem 'redis-rails', '~>3.2.3'
 
+gem 'dalli'
+
 group :development do
   gem 'pry'
   gem 'pry-nav'
