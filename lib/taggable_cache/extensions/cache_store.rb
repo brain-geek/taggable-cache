@@ -21,7 +21,7 @@ module TaggableCache
           taggable.add(key, *params)
         end
 
-        def delete_by_tags(*params)
+        def expire_tags(*params)
           taggable.get(*params).each do |m|
             self.delete(m)
           end
@@ -36,7 +36,7 @@ module TaggableCache
           Dir.glob(Rails.root + '/app/models/*.rb').each {|file| require file}
           
           ActiveRecord::Base.subclasses.each do |cls|
-            delete_by_tags cls
+            expire_tags cls
 
             pk_name = cls.primary_key
 
@@ -46,7 +46,7 @@ module TaggableCache
             first_id = 1
 
             (first_id..last_id).each do |id|
-              delete_by_tags({:cls => cls, :id => id})
+              expire_tags({:cls => cls, :id => id})
             end
           end
         end

@@ -24,7 +24,7 @@ module TaggableCache
     def self.included(base)
         [:after_update, :before_update, :before_destroy, :after_create].each do |event|
           base.send(event, Proc.new do |model|
-                  Rails.cache.delete_by_tags(model, model.class)
+                  Rails.cache.expire_tags(model, model.class)
                 end)
       end
     end
