@@ -25,4 +25,4 @@ env:
   - CACHE_STORE=redis
   - CACHE_STORE=memcached
   - CACHE_STORE=file_store
-
+  - CACHE_STORE=memory_store
