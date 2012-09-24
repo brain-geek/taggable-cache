@@ -20,7 +20,7 @@ Controller(action caching):
 View(fragment caching):
 
   <%# Page.active can be AR scope, every Page object on change is checked if it is in this scope, and if is - expires cache element %>
-  <% cache 'cache_entry', :depends_on => [Page.active] do %>
+  <% cache 'cache_entry', :depends_on => Page.active do %>
     <% Page.load_lot_of_data %>
   <% end %>
 
@@ -28,7 +28,7 @@ Usage with Rails.cache:
 
   page = Page.first
   #this cache key expires only when this Page object is changed/deleted
-  Rails.cache.write('key', 'value', :depends_on => [page])
+  Rails.cache.write('key', 'value', :depends_on => page)
 
 Usage with cells gem:
 
