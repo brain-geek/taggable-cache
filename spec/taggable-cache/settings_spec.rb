@@ -1,6 +1,15 @@
 require File.join(File.dirname(__FILE__), '..', 'spec_helper.rb')
 
 describe TaggableCache::Store do
+  before :all do
+    Rails.cache
+    @cache_settings = TaggableCache.settings
+  end
+
+  after :all do
+    TaggableCache.settings = @cache_settings
+  end
+
   def new_cache_instance
     Rails.cache.class.new
   end
