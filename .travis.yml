@@ -1,14 +1,18 @@
 language: ruby
+
 bundler_args: --without development
+
+services:
+  - memcached
+
 rvm:
   - 1.9.3
+
 gemfile:
   - gemfiles/Gemfile-rails.3.1.x
   - gemfiles/Gemfile-rails.3.2.x
+
 env:
   - CACHE_STORE=redis
   - CACHE_STORE=memcached
   - CACHE_STORE=file_store
-services:
-  - redis-server
-  - memcached
