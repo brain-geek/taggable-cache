@@ -2,9 +2,12 @@ language: ruby
 
 bundler_args: --without development
 
-# services:
-#   - memcache
-#   - redis
+before_install:
+  - ps aux|grep memcache
+
+services:
+  - memcached
+  - redis
 
 rvm:
   - 1.9.3
