@@ -10,5 +10,5 @@ env:
   - CACHE_STORE=memcached
   - CACHE_STORE=file_store
 services:
-  - redis
+  - redis-server
   - memcached
