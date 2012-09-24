@@ -4,13 +4,13 @@ describe TaggableCache::Store do
   describe "connection to redis" do
   	it "should use default settings" do
       Redis.should_receive(:new)
-      TaggableCache::Store::Redis.new
+      TaggableCache.new_store
   	end
   end
 
   describe "adding tags" do
     before :all do
-      @object = TaggableCache::Store::Redis.new
+      @object = TaggableCache.new_store
       @redis = Redis.new
       @redis.flushall
     end

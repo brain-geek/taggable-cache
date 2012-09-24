@@ -48,6 +48,16 @@ If you are using redis for cache, it is recommended to set default expire_ttl va
 
 Rails 3.1.x and 3.2.x are supported. Tested with ruby 1.9.3, but should work on 1.8.7. As cache storage you can use redis, memcached and file store caches. Other cache storages should work but have not been tested by author.
 
+== Customizing store backend options
+
+You can set custom host/port or store in taggable:
+
+  TaggableCache.settings = {
+    :store => :redis, 
+    :host => '127.0.0.1', 
+    :port => 6379
+  }
+
 == Contributing to taggable-cache
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.

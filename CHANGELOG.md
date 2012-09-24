@@ -1,3 +1,7 @@
+= Taggable cache 0.4.3
+- String can be used as key for expiration
+- Add support for multiple tag store backends
+
 = Taggable cache 0.4.2
 
 - Internal refactoring

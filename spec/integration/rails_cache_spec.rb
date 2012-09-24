@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), '..', 'spec_helper.rb')
 
 describe 'TaggableCache::Rails::Cache' do
   before :all do
-    @object = TaggableCache::Store::Redis.new
+    @object = TaggableCache.new_store
     @page_object = Page.create!
   end
 

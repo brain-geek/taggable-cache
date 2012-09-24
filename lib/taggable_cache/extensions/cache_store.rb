@@ -4,7 +4,7 @@ module TaggableCache
     def self.included(base)
       base.class_eval do
         def taggable
-          @taggable ||= ::TaggableCache::Store::Redis.new
+          @taggable ||= TaggableCache.new_store
         end
         
         def write_with_taggable(name, value, options = nil)

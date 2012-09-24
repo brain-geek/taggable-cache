@@ -3,9 +3,8 @@ require "digest/md5"
 
 module TaggableCache::Store
   class Redis < TaggableCache::Store::Base
-    def initialize
-      @redis = ::Redis.new  :host => ENV['REDIS_HOST'] || '127.0.0.1',
-                            :port => ENV['REDIS_PORT'] ? ENV['REDIS_PORT'].to_i : 6379
+    def initialize(params)
+      @redis = ::Redis.new params
     end
 
     def add(tag, *members)
