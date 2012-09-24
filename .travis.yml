@@ -9,7 +9,6 @@ before_install:
 matrix:
   allow_failures:
     - env: CACHE_STORE=memcached
-    - rvm: ree
 
 services:
   - memcached
@@ -17,7 +16,6 @@ services:
 
 rvm:
   - 1.9.3
-  - ree
 
 gemfile:
   - gemfiles/Gemfile-rails.3.1.x
