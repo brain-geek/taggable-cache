@@ -4,6 +4,7 @@ bundler_args: --without development
 
 before_install:
   - ps aux|grep memcache
+  - mkdir tmp/cache
 
 #memcache is allowed to fail because of error while tesitng on Travis - service is running, but ruby can not connect there
 matrix:
