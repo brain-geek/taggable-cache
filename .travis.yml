@@ -14,7 +14,7 @@ matrix:
 
 services:
   - memcached
-  - redis
+  - redis-server
 
 rvm:
   - 1.9.3
