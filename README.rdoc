@@ -1,10 +1,9 @@
-= Taggable cache
+= Taggable cache {<img src="https://secure.travis-ci.org/brain-geek/taggable-cache.png"/>}[http://travis-ci.org/brain-geek/taggable-cache]
 
 This gem simplifies cache expiration in rails by adding depends_on parameter to rails cache setting, which makes cache element expire when depending object is changed.
 
-= Build Status {<img src="https://secure.travis-ci.org/brain-geek/taggable-cache.png"/>}[http://travis-ci.org/brain-geek/taggable-cache]
 = How to use
-Taggable-cache uses redis to store cache tags data. You can use anything for an actual cache storage.
+Taggable-cache uses redis to store cache tags data. You can use anything for an actual cache storage. {RDoc}[http://rdoc.info/github/brain-geek/taggable-cache/master/frames]
 
 Controller(action caching):
 
