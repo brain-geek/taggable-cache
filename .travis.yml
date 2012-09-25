@@ -6,7 +6,7 @@ before_install:
   - cat /etc/memcached.conf
   # - sudo saslpasswd2 -a memcached -c cacheuser
 
-#memcache is allowed to fail because of error while tesitng on Travis - service is running, but ruby can not connect there
+#memcache is allowed to fail because of error while testing on Travis - service is running, but ruby can not connect there
 matrix:
   allow_failures:
     - env: CACHE_STORE=memcached
