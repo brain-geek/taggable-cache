@@ -3,7 +3,8 @@ language: ruby
 before_install:
   - ps aux|grep memcache
   - mkdir -p tmp/cache
-  - cat /etc/memcached.conf
+  - memcached -p 11212 &
+  # - cat /etc/memcached.conf
   # - sudo saslpasswd2 -a memcached -c cacheuser
 
 #memcache is allowed to fail because of error while testing on Travis - service is running, but ruby can not connect there
