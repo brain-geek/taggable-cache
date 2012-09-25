@@ -1,7 +1,6 @@
 language: ruby
 
 before_install:
-  - ps aux|grep memcache
   - mkdir -p tmp/cache
   - memcached -p 11212 &
 
