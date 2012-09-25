@@ -1,20 +1,11 @@
 language: ruby
 
-bundler_args: --without development
-
 before_install:
-  - ps aux|grep memcache
-  - mkdir tmp/cache
-
-#memcache is allowed to fail because of error while tesitng on Travis - service is running, but ruby can not connect there
-matrix:
-  allow_failures:
-    - env: CACHE_STORE=memcached
-    - env: CACHE_STORE=dalli
+  - mkdir -p tmp/cache
+  - memcached -p 11212 &
 
 services:
-  - memcached
-  - redis
+  - redis-server
 
 rvm:
   - 1.9.3
