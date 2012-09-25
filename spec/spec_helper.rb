@@ -15,9 +15,9 @@ class Combustion::Application
   when 'dalli'
     config.cache_store = :dalli_store
 
-dc = Dalli::Client.new('localhost:11211')
-dc.set('abc', 123)
-puts dc.get('abc')
+    dc = Dalli::Client.new('localhost:11211', :username => 'memcached', :password => 'cacheuser')
+    dc.set('abc', 123)
+    puts dc.get('abc')
 
   when 'file_store'
   end
