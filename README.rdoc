@@ -41,11 +41,18 @@ Usage with cells gem:
 
 If you are using redis for cache, it is recommended to set default expire_ttl value:
 
-    config.cache_store = ActiveSupport::Cache::RedisStore.new(:expire_in => 16.hours.to_i)
+  config.cache_store = ActiveSupport::Cache::RedisStore.new(:expire_in => 16.hours.to_i)
 
 == What is supported
 
-Rails 3.1.x and 3.2.x are supported. Tested with ruby 1.9.3, but should work on 1.8.7. As cache storage you can use redis, memcached and file store caches. Other cache storages should work but have not been tested by author.
+Rails 3.1.x and 3.2.x are both supported. Tested with ruby 1.9.3. Cache storage engines tested:
+- {redis}[https://github.com/jodosha/redis-store]
+- {dalli}[https://github.com/mperham/dalli]
+- {memcached-client}[https://github.com/mperham/memcache-client]
+- Rails file store
+- Rails memory store
+
+Other cache storages should work but have not been tested by author.
 
 == Customizing store backend options
 
@@ -69,4 +76,3 @@ You can set custom host/port or store in taggable:
 == Copyright
 
 Copyright (c) 2012 Alex Rozumey. See LICENSE.txt for further details.
-
