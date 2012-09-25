@@ -14,6 +14,11 @@ class Combustion::Application
     config.cache_store = :memory_store
   when 'dalli'
     config.cache_store = :dalli_store
+
+dc = Dalli::Client.new('localhost:11211')
+dc.set('abc', 123)
+puts dc.get('abc')
+
   when 'file_store'
   end
 end
