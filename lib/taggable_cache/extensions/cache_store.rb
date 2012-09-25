@@ -32,6 +32,8 @@ module TaggableCache
         return if cls.unscoped.first.nil? #There is no sence in continuing, if model is empty
 
         last_id = cls.order(pk_name).last.try(pk_name.to_sym)
+
+        #hardcoded value for first record
         first_id = 1
 
         (first_id..last_id).each do |id|
