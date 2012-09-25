@@ -4,7 +4,7 @@ before_install:
   - ps aux|grep memcache
   - mkdir -p tmp/cache
   - cat /etc/memcached.conf
-  - sudo saslpasswd2 -a memcached -c cacheuser
+  # - sudo saslpasswd2 -a memcached -c cacheuser
 
 #memcache is allowed to fail because of error while tesitng on Travis - service is running, but ruby can not connect there
 matrix:
