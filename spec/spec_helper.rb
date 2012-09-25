@@ -13,7 +13,7 @@ class Combustion::Application
   when 'memory_store'
     config.cache_store = :memory_store
   when 'dalli'
-    config.cache_store = :dalli_store
+    config.cache_store = :dalli_store, '127.0.0.1:11212'
 
     dc = Dalli::Client.new('localhost:11212', :username => 'memcached', :password => 'cacheuser')
     dc.set('abc', 123)
