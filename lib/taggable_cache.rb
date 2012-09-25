@@ -9,6 +9,7 @@ module TaggableCache
     @@settings = value
   end
 
+  # Creates new Taggable store instance based on current settings
   def new_store
     params = settings.dup
     params.delete(:store)

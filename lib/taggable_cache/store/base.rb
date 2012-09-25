@@ -1,5 +1,6 @@
 module TaggableCache::Store
   class Base
+    # Returns taggable cache unique id for object
     def id_for(obj)
       if obj.is_a? Class
         obj.to_s.downcase
@@ -26,10 +27,12 @@ module TaggableCache::Store
       end
     end
 
+    # Checks if this is AR scope
     def is_scope?(scope)
       (scope.is_a? ActiveRecord::Relation) || (scope.is_a? Arel::SelectManager)
     end
 
+    # Checks if object is in given scope
     def in_scope?(scope, object)
       return false unless object.persisted?
 
@@ -38,23 +41,18 @@ module TaggableCache::Store
       object.class.connection.select_all(query).length > 0
     end
 
-    def initialize
+    #:nodoc:
+    def initialize(attrs = {})
       raise ActionController::NotImplemented.new      
     end
 
+    #:nodoc:
     def add(tag, *members)
       raise ActionController::NotImplemented.new
     end
 
+    #:nodoc:
     def get(*members)
-      raise ActionController::NotImplemented.new
-    end
-
-    def add_scope(tag, scope)
-      raise ActionController::NotImplemented.new
-    end
-
-    def get_scope(*members)
       raise ActionController::NotImplemented.new
     end
   end

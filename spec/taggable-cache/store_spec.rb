@@ -104,15 +104,15 @@ describe TaggableCache::Store do
         @object.in_scope?(Page.order(:id), Page.new).should be_false
       end
 
-      describe "get_scope" do
+      describe "get" do
         it "should return keys and leave nothing behind" do
           #query to get all keys
           p = Page.create
           page = Page.order(:id) 
 
           @object.add('tag_name', page)
-          @object.get_scope(p).should == ['tag_name']
-          @object.get_scope(p).should == []
+          @object.get(p).should == ['tag_name']
+          @object.get(p).should == []
         end
 
         it "should do multi-get" do
@@ -124,9 +124,32 @@ describe TaggableCache::Store do
           @object.add('jack', Page.where(:name => 'jack'))
           @object.add('ian', Page.where(:name => 'ian'))
 
-          @object.get_scope(bob,jack).should == ['bob', 'jack']
-          @object.get_scope(bob,jack).should == []
-          @object.get_scope(ian).should == ['ian']
+          @object.get(bob,jack).should == ['bob', 'jack']
+          @object.get(bob,jack).should == []
+          @object.get(ian).should == ['ian']
+        end
+
+        it "should be able to mix both scope and simple element results" do
+          bob = Page.create(:name => 'bob')
+          jack = Page.create(:name => 'jack')
+          Page.create(:name => 'ian')
+
+          @object.add('bob', Page.where(:name => 'bob'))
+          @object.add('jack', jack)
+
+          @object.get(bob,jack).should =~ ['bob', 'jack']
+        end
+
+        it "should not duplicate keys" do
+          bob = Page.create(:name => 'bob')
+          jack = Page.create(:name => 'jack')
+          ian = Page.create(:name => 'ian')
+
+          @object.add('bob', Page.where('name is NOT NULL'))
+          @object.add('jack', Page.where(:name => 'jack'))
+          @object.add('ian', Page.where(:name => 'ian'))
+
+          @object.get(bob,jack,ian).should == ['bob', 'jack', 'ian']
         end
       end
     end

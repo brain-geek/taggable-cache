@@ -3,10 +3,11 @@ require "digest/md5"
 
 module TaggableCache::Store
   class Redis < TaggableCache::Store::Base
-    def initialize(params)
-      @redis = ::Redis.new params
+    def initialize(attrs = {})
+      @redis = ::Redis.new attrs
     end
 
+    # Add tag to multiple cache entries
     def add(tag, *members)
       members.each do |element|
         add_scope(tag, element) if is_scope? element
@@ -15,13 +16,24 @@ module TaggableCache::Store
       end
     end
 
+    # Get cache entries by given keys.
+    # This list is cleaned up after request:
+    #   page = Page.create
+    #   store.add('tag_name', page)
+    #   store.get_scope(p).should == ['tag_name']
+    #   store.get_scope(p).should == []
     def get(*members)
       keys = members.map { |tag| id_for(tag) }
       elements = @redis.sunion(keys)
       @redis.del(keys)
-      elements.flatten.compact
+      
+      scopes = members.delete_if {|a| not a.is_a? ActiveRecord::Base}
+
+      elements += get_scope(*scopes)
+      elements.flatten.uniq.compact
     end
 
+    protected
     def add_scope(tag, scope)
       scope = scope.arel if scope.is_a? ActiveRecord::Relation
       table_name = scope.froms.first.name
@@ -48,7 +60,7 @@ module TaggableCache::Store
         end
       end
       
-      keys.flatten.compact
+      keys
     end
   end
 end
