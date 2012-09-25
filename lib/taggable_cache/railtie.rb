@@ -9,6 +9,7 @@ module TaggableCache
         ::ActiveRecord::Base.send :include, TaggableCache::ActiveRecordExtension
         ::ActionController::Base.send :include, TaggableCache::ActionControllerExtension        
 
+        ::ActiveSupport::Cache::DalliStore.send :include, TaggableCache::CacheStoreExtension if defined? ::ActiveSupport::Cache::DalliStore
         ::ActiveSupport::Cache::RedisStore.send :include, TaggableCache::CacheStoreExtension if defined? ::ActiveSupport::Cache::RedisStore
         ::ActiveSupport::Cache::Store.send :include, TaggableCache::CacheStoreExtension
       end

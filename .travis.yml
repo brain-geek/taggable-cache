@@ -10,6 +10,7 @@ before_install:
 matrix:
   allow_failures:
     - env: CACHE_STORE=memcached
+    - env: CACHE_STORE=dalli
 
 services:
   - memcached
@@ -27,3 +28,4 @@ env:
   - CACHE_STORE=memcached
   - CACHE_STORE=file_store
   - CACHE_STORE=memory_store
+  - CACHE_STORE=dalli
