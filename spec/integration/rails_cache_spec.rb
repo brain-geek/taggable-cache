@@ -21,6 +21,16 @@ describe 'TaggableCache::Rails::Cache' do
       Rails.cache.write 'ipsum', 'lorem'
       Rails.cache.read('ipsum').should == 'lorem'
     end
+
+    it "does expire for namespaced key" do
+      Rails.cache.write('key', 'val', :namespace => 'lorem ipsum', :depends_on => @page_object)
+
+      Rails.cache.read('key', :namespace => 'lorem ipsum').should == 'val'
+
+      @page_object.save!
+
+      Rails.cache.read('key', :namespace => 'lorem ipsum').should be_nil
+    end
   end
 
   describe "Rails.cache.fetch integration" do
@@ -39,7 +49,6 @@ describe 'TaggableCache::Rails::Cache' do
 
       Rails.cache.read('ftch_ipsum').should == 'lorem ipsum'
 
-      @page_object.name = 'dfgsdgsdfgsdfg'
       @page_object.save!
 
       Rails.cache.read('ftch_ipsum').should be_nil
@@ -88,7 +97,6 @@ describe 'TaggableCache::Rails::Cache' do
       Rails.cache.read('key').should == 'value'
 
       #save should trigger deleting depending cache entries
-      @page_object.name = @page_object.name.to_s + '1'
       @page_object.save!
 
       Rails.cache.read('key').should be_nil

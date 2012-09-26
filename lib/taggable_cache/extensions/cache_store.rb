@@ -45,10 +45,8 @@ module TaggableCache
     included do |base|
       base.class_eval do
         # Returns taggable store instance
-        def write_with_taggable(name, value, options = nil)
-          if !options.nil? && options.has_key?(:depends_on) 
-            add_tags(name, *options[:depends_on])
-          end
+        def write_with_taggable(name, value, options = {})
+          add_tags(namespaced_key(name, options), *options[:depends_on]) if options.has_key?(:depends_on) 
 
           write_without_taggable(name, value, options)
         end
