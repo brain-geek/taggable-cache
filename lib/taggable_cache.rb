@@ -13,9 +13,9 @@ module TaggableCache
   def new_store
     params = settings.dup
     params.delete(:store)
+    
+    cls = Store::const_get(settings[:store].to_s.camelize)
 
-    cls_name = "taggable_cache/store/#{settings[:store]}"
-    cls = cls_name.camelize.constantize
     cls.send(:new, params)
   end
 
