@@ -3,18 +3,13 @@ module TaggableCache
     extend ActiveSupport::Concern
 
     module ClassMethods
-      def inherited_with_taggable(kls)
-        inherited_without_taggable kls
+      def inherited(kls)
         kls.send(:include, TaggableCache::ActiveRecordModelExtension) if kls.superclass == ActiveRecord::Base
+        super
       end      
     end
 
     included do
-      # Future subclasses will pick up the model extension
-      class << self
-        alias_method_chain :inherited, :taggable
-      end
-
       # Existing subclasses pick up the model extension as well
       self.descendants.each do |kls|
         kls.send(:include, TaggableCache::ActiveRecordModelExtension) if kls.superclass == ActiveRecord::Base
