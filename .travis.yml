@@ -2,6 +2,7 @@ language: ruby
 
 before_install:
   - mkdir -p tmp/cache
+  - mkdir -p spec/internal/db
   - memcached -p 11212 &
 
 services:
