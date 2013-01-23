@@ -191,7 +191,7 @@ describe TaggableCache::Store do
           @redis.smembers("page-#{page.id}").should == ['tag_name']
           @redis.smembers("page").should == ['tag2']
           
-          @object.get(page, Page).should == ['tag_name', 'tag2']
+          @object.get(page, Page).should ~= ['tag_name', 'tag2']
           @redis.smembers("page-#{page.id}").should be_empty
           @redis.smembers("page").should be_empty
         end
