@@ -18,7 +18,7 @@ class Combustion::Application
   end
 end
 
-Combustion.initialize!
+Combustion.initialize! :all
 
 require 'rspec/rails'
 require 'capybara/rails'
