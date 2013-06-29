@@ -45,7 +45,7 @@ If you are using redis for cache, it is recommended to set default expire_ttl va
 
 == What is supported
 
-Rails 3.1.x and 3.2.x are both supported. Tested with ruby 1.9.3. Cache storage engines tested:
+Rails 3.1.x and 3.2.x are both supported. Tested with rubies 1.9.3 and 2.0.0. Cache storage engines tested:
 - {redis}[https://github.com/jodosha/redis-store]
 - {dalli}[https://github.com/mperham/dalli]
 - {memcached-client}[https://github.com/mperham/memcache-client]
