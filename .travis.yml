@@ -1,12 +1,11 @@
 language: ruby
 
 before_install:
-  - mkdir -p tmp/cache
-  - mkdir -p spec/internal/db
-  - memcached -p 11212 &
+  - mkdir -p tmp/cache spec/internal/db
 
 services:
   - redis-server
+  - memcached
 
 rvm:
   - 1.9.3
