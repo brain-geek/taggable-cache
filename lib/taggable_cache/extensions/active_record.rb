@@ -20,7 +20,7 @@ module TaggableCache
   module ActiveRecordModelExtension
     extend ActiveSupport::Concern
     def self.included(base)
-      [:after_create, :after_update, :after_destroy, :after_commit, :after_rollback, :after_save].each do |event|
+      [:after_create, :after_update, :after_destroy, :after_commit, :after_rollback, :after_save, :before_update, :before_destroy].each do |event|
         base.send(event, proc { |model| Rails.cache.expire_tags(model, model.class) })
       end
     end
