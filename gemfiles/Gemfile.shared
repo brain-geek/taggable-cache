@@ -2,10 +2,12 @@ source 'https://rubygems.org'
 
 gem 'rake'
 gem 'rspec-rails', :require => false
+gem 'database_cleaner'
 gem 'rspec'
 gem 'capybara'
 gem "combustion", "=0.3.2"
 gem 'sqlite3'
+
 
 gem 'memcache-client'
 gem 'dalli'

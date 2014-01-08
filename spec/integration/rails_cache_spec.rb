@@ -127,13 +127,16 @@ describe 'TaggableCache::Rails::Cache' do
 
       it "should drop if object has been in scope before changes" do
         page = Page.create(:name => 'jack')
+        binding.pry
 
         Rails.cache.write('lorem', 'impsum', :depends_on => [Page.where(:name => 'jack')])
         Rails.cache.read('lorem').should == 'impsum'
 
+        binding.pry
         page.name = 'alice'
         page.save!
 
+        binding.pry
         Rails.cache.read('lorem').should be_nil
       end
 
