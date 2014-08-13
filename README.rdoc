@@ -1,3 +1,5 @@
+== Note: it DOES NOT work with rails 4.x . If you want to have similar functionality in your rails 4.x project - please use https://github.com/brain-geek/activerecord_cashier
+
 = Taggable cache {<img src="https://secure.travis-ci.org/brain-geek/taggable-cache.png"/>}[http://travis-ci.org/brain-geek/taggable-cache]
 
 This gem simplifies cache expiration in rails by adding depends_on parameter to rails cache setting, which makes cache element expire when depending object is changed.
